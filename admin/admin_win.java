@@ -51,7 +51,7 @@ public class admin_win {
 
 
         win.add(l1); win.add(t_name); win.add(l2); win.add(t_price); win.add(l3); win.add(t_type);
-        win.add(b_add); win.add(l4); win.add(area_orders);
+        win.add(b_add); win.add(l4);
 
         b_add.addActionListener(e->{
             String n = t_name.getText();
