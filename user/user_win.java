@@ -23,7 +23,7 @@ public class user_win {
         JLabel lb1 = new JLabel("Type:");
         lb1.setBounds(30, 20, 50, 25);
         win.add(lb1);
-        box_type = new JComboBox<>(new String[]{"all", "veg", "nonveg", "jain"});
+        box_type = new JComboBox<>(new String[]{"All", "Veg", "Non-Veg", "Jain"});
         box_type.setBounds(80, 20, 80, 25);
         win.add(box_type);
 
@@ -105,13 +105,24 @@ public class user_win {
         win.setVisible(true);
     }
 
-    void updateDishList() {
+    /*void updateDishList() {
         String tp = (String)box_type.getSelectedItem();
         box_dish.removeAllItems();
         for(dish d: menu_store.items)
             if(tp.equals("all")||d.type.equals(tp)) box_dish.addItem(d);
-    }
+    }*/
 
+    void updateDishList() {
+        String tp = (String) box_type.getSelectedItem();
+        box_dish.removeAllItems();
+    
+        for (dish d : menu_store.items) {
+            if (tp.equals("All") || d.type.equalsIgnoreCase(tp)) {
+                box_dish.addItem(d);
+            }
+        }
+    }
+    
     void saveOrder() {
         try(PrintWriter w = new PrintWriter(new FileWriter("orders.txt",true))){
             w.println(order_now.summary().replace("\n"," | "));
