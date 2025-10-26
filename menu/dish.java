@@ -9,6 +9,18 @@ public class dish {
         this.price = price;
         this.type = type; // "veg", "nonveg", "jain"
     }
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getType() {
+        return type;
+    }
+    
     public String toString() {
         return name + " (" + type + ") - ₹" + price;
     }

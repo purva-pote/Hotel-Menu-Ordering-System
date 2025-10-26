@@ -2,12 +2,22 @@ package menu;
 
 import java.util.*;
 import java.io.*;
+import menu.dish;
 
 public class menu_store {
     public static List<dish> items = new ArrayList<>();
+
+    public static List<dish> getDishes() {
+        return items;
+    }
+
+    public static void removeDish(String name) {
+        items.removeIf(d -> d.getName().equals(name));
+    }
+
     static String file = "menu.txt";
 
-    // Load menu from disk
+ 
     public static void load() {
         items.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -18,11 +28,9 @@ public class menu_store {
                     items.add(new dish(t[0], Integer.parseInt(t[1]), t[2]));
             }
         } catch (Exception ex) {
-            // ignore file not found on first run
         }
     }
 
-    // Save menu to disk
     public static void save() {
         try (PrintWriter pw = new PrintWriter(new FileWriter(file))) {
             for (dish d : items) {
