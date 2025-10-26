@@ -21,7 +21,7 @@ public class feedback_win {
             JOptionPane.showMessageDialog(win,"Thank you!");
             win.dispose();
             System.exit(0);
-        });
+        }); 
         win.setLayout(null);
         win.setVisible(true);
     }
