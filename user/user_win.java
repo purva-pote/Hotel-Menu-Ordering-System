@@ -49,6 +49,14 @@ public class user_win {
         b_add.setBounds(30, 140, 80, 25);
         win.add(b_add);
 
+        JButton b_back = new JButton("Back");
+        b_back.setBounds(30, 245, 80, 25);
+        win.add(b_back);
+        b_back.addActionListener(e -> {
+            win.dispose(); 
+            main.main_win.main(null);
+        });
+
         area_order = new JTextArea();
         area_order.setEditable(false);
         JScrollPane scroll = new JScrollPane(area_order);
