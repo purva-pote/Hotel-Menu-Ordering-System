@@ -97,6 +97,7 @@ public class user_win {
 
         b_pay.addActionListener(e->{
             saveOrder();
+            win.dispose();
             new feedback_win().show();
         });
 

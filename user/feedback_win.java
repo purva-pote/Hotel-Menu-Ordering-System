@@ -22,7 +22,7 @@ public class feedback_win {
             }catch(Exception x){}
             JOptionPane.showMessageDialog(win,"Thank you!");
             win.dispose();
-            System.exit(0);
+            main.main_win.main(null);
         }); 
         win.setLayout(null);
         win.setVisible(true);
