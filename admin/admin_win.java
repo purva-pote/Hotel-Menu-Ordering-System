@@ -25,10 +25,17 @@ public class admin_win {
         t_price = new JTextField();
         t_price.setBounds(100, 60, 120, 25);
 
-        JLabel l3 = new JLabel("Type");
+        /*JLabel l3 = new JLabel("Type");
         l3.setBounds(20, 100, 80, 25);
         t_type = new JTextField();
+        t_type.setBounds(100, 100, 120, 25);*/
+
+        JLabel l3 = new JLabel("Type");
+        l3.setBounds(20, 100, 80, 25);
+        String[] foodTypes = {"All", "Veg", "Non-Veg", "Jain"};
+        JComboBox<String> t_type = new JComboBox<>(foodTypes);
         t_type.setBounds(100, 100, 120, 25);
+
 
         JButton b_add = new JButton("Add/Update");
         b_add.setBounds(60, 140, 120, 30);
@@ -52,7 +59,8 @@ public class admin_win {
                 JOptionPane.showMessageDialog(win,"Bad input");
                 return;
             }
-            menu_store.addDish(n, pr, t_type.getText());
+            menu_store.addDish(n, pr, (String) t_type.getSelectedItem()
+            );
             menu_store.load();
             JOptionPane.showMessageDialog(win,"Menu updated!");
         });
