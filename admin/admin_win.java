@@ -12,40 +12,35 @@ public class admin_win {
     public void show() {
         menu_store.load();
         win = new JFrame("Admin");
-        win.setSize(350, 400);
+        win.setSize(650, 480);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel l1 = new JLabel("Dish Name");
-        l1.setBounds(20, 20, 80, 25);
+        l1.setBounds(20, 20, 120, 32);
         t_name = new JTextField();
-        t_name.setBounds(100, 20, 120, 25);
+        t_name.setBounds(150, 20, 180, 32);
 
         JLabel l2 = new JLabel("Price");
-        l2.setBounds(20, 60, 80, 25);
+        l2.setBounds(20, 70, 120, 32);
         t_price = new JTextField();
-        t_price.setBounds(100, 60, 120, 25);
-
-        /*JLabel l3 = new JLabel("Type");
-        l3.setBounds(20, 100, 80, 25);
-        t_type = new JTextField();
-        t_type.setBounds(100, 100, 120, 25);*/
+        t_price.setBounds(150, 70, 180, 32);
 
         JLabel l3 = new JLabel("Type");
-        l3.setBounds(20, 100, 80, 25);
+        l3.setBounds(20, 120, 120, 32);
         String[] foodTypes = {"All", "Veg", "Non-Veg", "Jain"};
         JComboBox<String> t_type = new JComboBox<>(foodTypes);
-        t_type.setBounds(100, 100, 120, 25);
+        t_type.setBounds(150, 120, 180, 32);
 
 
         JButton b_add = new JButton("Add/Update");
-        b_add.setBounds(60, 140, 120, 30);
+        b_add.setBounds(20, 180, 150, 32);
 
         JLabel l4 = new JLabel("Recent Orders:");
-        l4.setBounds(20, 190, 120, 25);
+        l4.setBounds(20, 240, 140, 25);
         area_orders = new JTextArea();
         area_orders.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(area_orders);
-        scrollPane.setBounds(20, 220, 300, 100);
+        scrollPane.setBounds(20, 270, 600, 100);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         win.add(scrollPane);
 
@@ -70,12 +65,12 @@ public class admin_win {
         });
 
         JButton b_r = new JButton("Refresh Orders");
-        b_r.setBounds(200, 190, 120, 25);
+        b_r.setBounds(480, 230, 140, 25);
         win.add(b_r);
         b_r.addActionListener(e->loadOrders());
 
         JButton b_back = new JButton("Back");
-        b_back.setBounds(20, 330, 80, 25);
+        b_back.setBounds(20, 390, 120, 32);
         win.add(b_back);
         b_back.addActionListener(e -> {
             win.dispose(); 
