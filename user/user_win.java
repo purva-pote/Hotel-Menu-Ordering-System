@@ -50,9 +50,12 @@ public class user_win {
         win.add(b_add);
 
         area_order = new JTextArea();
-        area_order.setBounds(300, 20, 160, 180);
         area_order.setEditable(false);
-        win.add(area_order);
+        JScrollPane scroll = new JScrollPane(area_order);
+        scroll.setBounds(300, 20, 160, 180);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        win.add(scroll);
 
         JButton b_show = new JButton("Order Summary");
         b_show.setBounds(300, 210, 140, 25);
