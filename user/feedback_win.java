@@ -1,5 +1,7 @@
 package user;
 import javax.swing.*;
+import java.io.PrintWriter;
+import java.io.FileWriter;
 
 public class feedback_win {
     public void show() {

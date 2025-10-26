@@ -2,6 +2,8 @@ package user;
 import javax.swing.*;
 import menu.*;
 import java.util.*;
+import java.io.PrintWriter;
+import java.io.FileWriter;
 
 public class user_win {
     JFrame win;
