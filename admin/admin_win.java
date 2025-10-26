@@ -43,8 +43,12 @@ public class admin_win {
         JLabel l4 = new JLabel("Recent Orders:");
         l4.setBounds(20, 190, 120, 25);
         area_orders = new JTextArea();
-        area_orders.setBounds(20, 220, 300, 120);
         area_orders.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(area_orders);
+        scrollPane.setBounds(20, 220, 300, 100);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        win.add(scrollPane);
+
 
         win.add(l1); win.add(t_name); win.add(l2); win.add(t_price); win.add(l3); win.add(t_type);
         win.add(b_add); win.add(l4); win.add(area_orders);
@@ -69,6 +73,14 @@ public class admin_win {
         b_r.setBounds(200, 190, 120, 25);
         win.add(b_r);
         b_r.addActionListener(e->loadOrders());
+
+        JButton b_back = new JButton("Back");
+        b_back.setBounds(20, 330, 80, 25);
+        win.add(b_back);
+        b_back.addActionListener(e -> {
+            win.dispose(); 
+            main.main_win.main(null);
+        });
 
         win.setLayout(null);
         win.setVisible(true);
