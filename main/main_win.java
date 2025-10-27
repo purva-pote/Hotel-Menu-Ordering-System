@@ -7,7 +7,7 @@ public class main_win {
         JFrame win = new JFrame("Hotel Menu");
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Font font = new Font("SansSerif", Font.PLAIN, 16); // Or any font and size you want
+        Font font = new Font("SansSerif", Font.PLAIN, 16);
         java.util.Enumeration<Object> keys = UIManager.getDefaults().keys();
         while (keys.hasMoreElements()) {
             Object key = keys.nextElement();
@@ -17,21 +17,40 @@ public class main_win {
             }
         }
 
-        // Center panel using GridBagLayout for button arrangement
+        JPanel outerPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints outerGbc = new GridBagConstraints();
+        outerGbc.gridx = 0;
+        outerGbc.gridy = 0;
+        outerGbc.anchor = GridBagConstraints.CENTER;
+
+        JPanel innerPanel = new JPanel();
+        innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
+
+        JLabel heading = new JLabel("Your Hotel Name Here", SwingConstants.CENTER);
+        heading.setAlignmentX(Component.CENTER_ALIGNMENT);
+        heading.setFont(new Font("SansSerif", Font.BOLD, 36));
+        heading.setBorder(BorderFactory.createEmptyBorder(10, 0, 30, 0));
+
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
         JButton b1 = new JButton("User");
         JButton b2 = new JButton("Admin");
 
-        gbc.insets = new Insets(8, 24, 8, 24); // Spacing between buttons
-
+        gbc.insets = new Insets(8, 24, 8, 24);
         gbc.gridx = 0; gbc.gridy = 0;
         panel.add(b1, gbc);
         gbc.gridx = 1;
         panel.add(b2, gbc);
 
-        win.add(panel, BorderLayout.CENTER);
+        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        innerPanel.add(heading);
+        innerPanel.add(panel);
+
+        outerPanel.add(innerPanel, outerGbc);
+
+        win.setContentPane(outerPanel);
 
         b1.addActionListener(e -> {
             new user.user_win().show();
