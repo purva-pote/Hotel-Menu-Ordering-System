@@ -1,6 +1,7 @@
 package admin;
 import javax.swing.*;
 import menu.menu_store;
+import main.RoundedButton;
 import java.util.*;
 import java.awt.*;
 
@@ -19,17 +20,19 @@ public class admin_win {
         // Main panel with padding
         JPanel mainPanel = new JPanel(new BorderLayout(15, 15));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-
+        mainPanel.setBackground(new Color(255, 246, 218));
         // Heading
         JLabel heading = new JLabel("Admin Dashboard", SwingConstants.CENTER);
-        heading.setFont(new Font("Arial", Font.BOLD, 28));
+        heading.setFont(new Font("Arial", Font.BOLD, 32));
+        heading.setForeground(new Color(118, 75, 0));
         mainPanel.add(heading, BorderLayout.NORTH);
 
         // Top panel: Add and Delete sections side by side with headings horizontally aligned
         JPanel topPanel = new JPanel(new GridLayout(1, 2, 40, 0));
-
+        topPanel.setBackground(new Color(255, 246, 218));
         // --- Add Item panel ---
         JPanel addPanel = new JPanel(new GridBagLayout());
+        addPanel.setBackground(new Color(255, 246, 218));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 8, 8, 8);
         gbc.anchor = GridBagConstraints.WEST;
@@ -37,18 +40,21 @@ public class admin_win {
         gbc.gridx = 0; gbc.gridy = 0;
         JLabel lblAdd = new JLabel("Add Item :");
         lblAdd.setFont(new Font("Arial", Font.BOLD, 18));
+        lblAdd.setForeground(new Color(118, 75, 0));
         addPanel.add(lblAdd, gbc);
 
         gbc.gridx = 1; gbc.gridy = 0;
         addPanel.add(new JLabel("Dish Name:"), gbc);
         gbc.gridx = 2; gbc.gridy = 0;
         t_name = new JTextField(13);
+        t_name.setBackground(new Color(214, 229, 198));
         addPanel.add(t_name, gbc);
 
         gbc.gridx = 1; gbc.gridy = 1;
         addPanel.add(new JLabel("Price:"), gbc);
         gbc.gridx = 2;
         t_price = new JTextField(13);
+        t_price.setBackground(new Color(214, 229, 198));
         addPanel.add(t_price, gbc);
 
         gbc.gridx = 1; gbc.gridy = 2;
@@ -56,10 +62,13 @@ public class admin_win {
         gbc.gridx = 2;
         String[] foodTypes = {"All", "Veg", "Non-Veg", "Jain"};
         t_type = new JComboBox<>(foodTypes);
+        t_type.setBackground(new Color(214, 229, 198));
         addPanel.add(t_type, gbc);
 
         gbc.gridx = 2; gbc.gridy = 3;
-        JButton b_add = new JButton("Add");
+        RoundedButton b_add = new RoundedButton("Add",10);
+        b_add.setBackground(new Color(61,137, 58 ));
+        b_add.setForeground(new Color(255, 246, 218));
         addPanel.add(b_add, gbc);
 
         
@@ -68,20 +77,25 @@ public class admin_win {
         GridBagConstraints gbc2 = new GridBagConstraints();
         gbc2.insets = new Insets(8, 8, 8, 8);
         gbc2.anchor = GridBagConstraints.WEST;
+        deletePanel.setBackground(new Color(255, 246, 218));
 
         gbc2.gridx = 0; gbc2.gridy = 0;
         JLabel lblDelete = new JLabel("Delete Item :");
         lblDelete.setFont(new Font("Arial", Font.BOLD, 18));
+        lblDelete.setForeground(new Color(118, 75, 0));
         deletePanel.add(lblDelete, gbc2);
 
         gbc2.gridx = 1; gbc2.gridy = 0;
         deletePanel.add(new JLabel("Dish Name:"), gbc2);
         gbc2.gridx = 2;
         JComboBox<String> box_delete = new JComboBox<>();
+        box_delete.setBackground(new Color(214, 229, 198));
         deletePanel.add(box_delete, gbc2);
 
         gbc2.gridx = 2; gbc2.gridy = 1;
-        JButton b_delete = new JButton("Delete");
+        RoundedButton b_delete = new RoundedButton("Delete",10);
+        b_delete.setBackground(new Color(61,137, 58 ));
+        b_delete.setForeground(new Color(255, 246, 218));
         deletePanel.add(b_delete, gbc2);
 
         // Fill delete dropdown
@@ -90,11 +104,11 @@ public class admin_win {
         // Wrap addPanel inside a FlowLayout wrapper for centered top-alignment
         JPanel addWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 10));
         addWrapper.add(addPanel);
-
+        addWrapper.setBackground(new Color(255, 246, 218));
         // Wrap deletePanel as before
         JPanel deleteWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 10));
         deleteWrapper.add(deletePanel);
-
+        deleteWrapper.setBackground(new Color(255, 246, 218));
         // Add wrappers to the topPanel grid layout
         topPanel.add(addWrapper);
         topPanel.add(deleteWrapper);
@@ -102,23 +116,35 @@ public class admin_win {
 
         // Orders and actions panel
         JPanel ordersPanel = new JPanel(new BorderLayout(20, 10));
+        ordersPanel.setBackground(new Color(255, 246, 218));
+        ordersPanel.setBorder(BorderFactory.createEmptyBorder(0, 30, 10, 30));
         JPanel titlePanel = new JPanel(new BorderLayout());
+        titlePanel.setBackground(new Color(255, 246, 218));
+        //titlePanel.setBorder(BorderFactory.createEmptyBorder(0, 30, 10, 30));
 
         JLabel lblOrders = new JLabel("Recent Orders:");
+        lblOrders.setForeground(new Color(118, 75, 0));
         lblOrders.setFont(new Font("Arial", Font.BOLD, 18));
         titlePanel.add(lblOrders, BorderLayout.WEST);
 
-        JButton b_r = new JButton("Refresh Orders");
+        RoundedButton b_r = new RoundedButton("Refresh Orders",10);
+        b_r.setBackground(new Color(61,137, 58 ));
+        b_r.setForeground(new Color(255, 246, 218));
         titlePanel.add(b_r, BorderLayout.EAST);
 
         area_orders = new JTextArea(8, 50);
+        area_orders.setBackground(new Color(214, 229, 198));
         area_orders.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(area_orders,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         JPanel bottomActions = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JButton b_back = new JButton("Back");
+        bottomActions.setBackground(new Color(255, 246, 218));
+        RoundedButton b_back = new RoundedButton("Back", 10);
+        b_back.setBackground(new Color(61,137, 58 ));
+        b_back.setForeground(new Color(255, 246, 218));
+
         bottomActions.add(b_back);
 
         ordersPanel.add(titlePanel, BorderLayout.NORTH);
