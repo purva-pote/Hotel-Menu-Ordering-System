@@ -13,6 +13,7 @@ public class menu_store {
 
     public static void removeDish(String name) {
         items.removeIf(d -> d.getName().equals(name));
+        save();
     }
 
     static String file = "menu.txt";
