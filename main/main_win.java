@@ -6,7 +6,6 @@ public class main_win {
     public static void main(String[] args) {
         JFrame win = new JFrame("Hotel Menu");
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
 
 
         Font font = new Font("SansSerif", Font.PLAIN, 16);
