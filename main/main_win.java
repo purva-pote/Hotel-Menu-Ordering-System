@@ -19,7 +19,7 @@ public class main_win {
             }
         }
 
-        BackgroundPanel bgPanel = new BackgroundPanel("mainbg.jpg");
+        BackgroundPanel bgPanel = new BackgroundPanel("mainbg2.jpg");
         bgPanel.setLayout(new GridBagLayout());
         GridBagConstraints outerGbc = new GridBagConstraints();
         outerGbc.gridx = 0;
@@ -35,11 +35,11 @@ public class main_win {
 
 
 
-        JLabel heading = new JLabel("Your Hotel Name Here", SwingConstants.CENTER);
+        JLabel heading = new JLabel("Hotel Solace", SwingConstants.CENTER);
         heading.setAlignmentX(Component.CENTER_ALIGNMENT);
-        heading.setFont(new Font("SansSerif", Font.BOLD, 48)); 
+        heading.setFont(new Font("SansSerif",Font.BOLD + Font.ITALIC, 58)); 
         heading.setOpaque(false); 
-        heading.setForeground(Color.WHITE); 
+        heading.setForeground(new Color(118, 75, 0)); 
         heading.setBorder(BorderFactory.createEmptyBorder(30, 40, 20, 40));
 
         /*
@@ -58,8 +58,18 @@ public class main_win {
         GridBagConstraints gbc = new GridBagConstraints();
         panel.setOpaque(false);
 
-        JButton b1 = new JButton("User");
-        JButton b2 = new JButton("Admin");
+        RoundedButton b1 = new RoundedButton("User", 10);
+        b1.setFont(new Font("Arial", Font.BOLD, 18));
+        b1.setBackground(new Color(61,137, 58 ));
+        b1.setForeground(new Color(255, 246, 218));
+        b1.setPreferredSize(new Dimension(80, 35));
+
+
+        RoundedButton b2 = new RoundedButton("Admin", 10);
+        b2.setFont(new Font("Arial", Font.BOLD, 18));
+        b2.setBackground(new Color(61,137, 58 ));
+        b2.setForeground(new Color(255, 246, 218));
+        b2.setPreferredSize(new Dimension(100,35));
 
         gbc.insets = new Insets(8, 24, 8, 24);
         gbc.gridx = 0; gbc.gridy = 0;
