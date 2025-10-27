@@ -4,6 +4,7 @@ import menu.*;
 import java.util.*;
 import java.io.PrintWriter;
 import java.io.FileWriter;
+import java.awt.*;
 
 public class user_win {
     JFrame win;
@@ -17,62 +18,81 @@ public class user_win {
     public void show() {
         menu_store.load();
         win = new JFrame("User Order");
-        win.setSize(700, 450);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Main container panel
+        JPanel root = new JPanel(new BorderLayout(16,16));
+        root.setBorder(BorderFactory.createEmptyBorder(16,16,16,16));
+
+        // Left side: Controls
+        JPanel leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel.setPreferredSize(new Dimension(340, 0));
+
+        // Type
+        JPanel panelType = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lb1 = new JLabel("Type:");
-        lb1.setBounds(30, 20, 80, 32);
-        win.add(lb1);
         box_type = new JComboBox<>(new String[]{"All", "Veg", "Non-Veg", "Jain"});
-        box_type.setBounds(120, 20, 120, 32);
-        win.add(box_type);
+        box_type.setMaximumSize(new Dimension(150,32));
+        panelType.add(lb1); panelType.add(box_type);
+        leftPanel.add(panelType);
 
+        // Dish
+        JPanel panelDish = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lb2 = new JLabel("Dish:");
-        lb2.setBounds(30, 70, 80, 32);
-        win.add(lb2);
         box_dish = new JComboBox<>();
-        box_dish.setBounds(120, 70, 230, 32);
-        win.add(box_dish);
+        box_dish.setPreferredSize(new Dimension(200,32));
+        panelDish.add(lb2); panelDish.add(box_dish);
+        leftPanel.add(panelDish);
 
+        // Quantity and Takeaway
+        JPanel panelQty = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lb3 = new JLabel("Qty:");
-        lb3.setBounds(30, 120, 50, 32);
-        win.add(lb3);
-        qty = new JTextField("1");
-        qty.setBounds(90, 120, 60, 32);
-        win.add(qty);
-
+        qty = new JTextField("1", 4);
         chk_takeaway = new JCheckBox("Takeaway");
-        chk_takeaway.setBounds(170, 120, 120, 32);
-        win.add(chk_takeaway);
+        panelQty.add(lb3); panelQty.add(qty); panelQty.add(chk_takeaway);
+        leftPanel.add(panelQty);
 
+        leftPanel.add(Box.createVerticalStrut(16));
+
+        // Buttons
+        JPanel panelBtn = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
         JButton b_add = new JButton("Add Item");
-        b_add.setBounds(30, 220, 140, 32);
-        win.add(b_add);
-
         JButton b_back = new JButton("Back");
-        b_back.setBounds(30, 322, 140, 32);
-        win.add(b_back);
-        b_back.addActionListener(e -> {
-            win.dispose(); 
-            main.main_win.main(null);
-        });
+        panelBtn.add(b_add); panelBtn.add(b_back);
+        leftPanel.add(panelBtn);
 
-        area_order = new JTextArea();
+        // Right side: Order summary
+        JPanel rightPanel = new JPanel();
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+
+        JLabel orderLabel = new JLabel("Order Summary:");
+        area_order = new JTextArea(10,30);
+        area_order.setLineWrap(true);
         area_order.setEditable(false);
-        JScrollPane scroll = new JScrollPane(area_order);
-        scroll.setBounds(370, 20, 280, 180);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        win.add(scroll);
+        JScrollPane scroll = new JScrollPane(area_order,
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+            JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        rightPanel.add(orderLabel);
+        rightPanel.add(scroll);
 
+        // Order action buttons
+        JPanel panelOrderBtn = new JPanel(new FlowLayout(FlowLayout.LEFT,8,8));
         JButton b_show = new JButton("Order Summary");
-        b_show.setBounds(370, 220, 140, 32);
-        win.add(b_show);
-
         JButton b_pay = new JButton("Place Order");
-        b_pay.setBounds(520, 220, 130, 32);
-        win.add(b_pay);
+        panelOrderBtn.add(b_show); panelOrderBtn.add(b_pay);
+        rightPanel.add(panelOrderBtn);
 
+        // Add panels to root
+        root.add(leftPanel, BorderLayout.WEST);
+        root.add(rightPanel, BorderLayout.CENTER);
+
+        win.setContentPane(root);
+        win.setMinimumSize(new Dimension(800,450));
+        win.setSize(1000,600);
+        win.setLocationRelativeTo(null);
+
+        // Listeners
         box_type.addActionListener(a -> updateDishList());
         updateDishList();
 
@@ -92,7 +112,7 @@ public class user_win {
             area_order.setText(order_now.summary());
         });
 
-        b_show.addActionListener(e -> area_order.setText(order_now.summary()));
+        b_show.addActionListener(e ->area_order.setText(order_now.summary()));
 
         b_pay.addActionListener(e->{
             saveOrder();
@@ -100,26 +120,26 @@ public class user_win {
             new feedback_win().show();
         });
 
-        win.setLayout(null);
+        b_back.addActionListener(e -> {
+            win.dispose();
+            main.main_win.main(null);
+        });
+
         win.setVisible(true);
     }
-
 
     void updateDishList() {
         String tp = (String) box_type.getSelectedItem();
         box_dish.removeAllItems();
-    
         for (dish d : menu_store.items) {
             if (tp.equals("All") || d.type.equalsIgnoreCase(tp)) {
                 box_dish.addItem(d);
             }
         }
     }
-    
     void saveOrder() {
         try(PrintWriter w = new PrintWriter(new FileWriter("orders.txt",true))){
             w.println(order_now.summary().replace("\n"," | "));
         }catch(Exception x){}
     }
 }
-
