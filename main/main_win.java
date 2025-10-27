@@ -6,6 +6,8 @@ public class main_win {
     public static void main(String[] args) {
         JFrame win = new JFrame("Hotel Menu");
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+
 
         Font font = new Font("SansSerif", Font.PLAIN, 16);
         java.util.Enumeration<Object> keys = UIManager.getDefaults().keys();
@@ -17,22 +19,44 @@ public class main_win {
             }
         }
 
-        JPanel outerPanel = new JPanel(new GridBagLayout());
+        BackgroundPanel bgPanel = new BackgroundPanel("mainbg.jpg");
+        bgPanel.setLayout(new GridBagLayout());
         GridBagConstraints outerGbc = new GridBagConstraints();
         outerGbc.gridx = 0;
         outerGbc.gridy = 0;
         outerGbc.anchor = GridBagConstraints.CENTER;
 
+
         JPanel innerPanel = new JPanel();
         innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
 
+        innerPanel.setBackground(new Color(0, 0, 0, 0)); // black with alpha for transparency
+        innerPanel.setOpaque(true);
+
+
+
         JLabel heading = new JLabel("Your Hotel Name Here", SwingConstants.CENTER);
         heading.setAlignmentX(Component.CENTER_ALIGNMENT);
-        heading.setFont(new Font("SansSerif", Font.BOLD, 36));
-        heading.setBorder(BorderFactory.createEmptyBorder(10, 0, 30, 0));
+        heading.setFont(new Font("SansSerif", Font.BOLD, 48)); 
+        heading.setOpaque(false); 
+        heading.setForeground(Color.WHITE); 
+        heading.setBorder(BorderFactory.createEmptyBorder(30, 40, 20, 40));
+
+        /*
+        heading.setUI(new javax.swing.plaf.basic.BasicLabelUI() {
+            protected void paintSafely(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setColor(Color.BLACK);
+                g2.drawString(heading.getText(), 3, heading.getBaseline(0, 0) + 1);
+                g2.setColor(Color.WHITE);
+                g2.drawString(heading.getText(), 2, heading.getBaseline(0, 0));
+            }
+        });*/
+        
 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        panel.setOpaque(false);
 
         JButton b1 = new JButton("User");
         JButton b2 = new JButton("Admin");
@@ -48,9 +72,8 @@ public class main_win {
         innerPanel.add(heading);
         innerPanel.add(panel);
 
-        outerPanel.add(innerPanel, outerGbc);
-
-        win.setContentPane(outerPanel);
+        bgPanel.add(innerPanel, outerGbc);
+        win.setContentPane(bgPanel);
 
         b1.addActionListener(e -> {
             new user.user_win().show();
